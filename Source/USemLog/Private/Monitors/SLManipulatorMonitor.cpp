@@ -335,7 +335,10 @@ bool USLManipulatorMonitor::LoadBoneMonitorGroups()
 	// Lambda to check grasp overlap components of owner and add them to their groups
 	const auto GetOverlapComponentsLambda = [this](AActor* Owner)
 	{
-		TArray<UActorComponent*> GraspOverlaps = Owner->GetComponentsByClass(USLBoneContactMonitor::StaticClass());
+		//Default: TArray<UActorComponent*> GraspOverlaps = Owner->GetComponentsByClass(USLBoneContactMonitor::StaticClass());
+		//Nils: TArray<UActorComponent*> GraspOverlaps = Owner->GetComponents<USLBoneContactMonitor>();
+		TArray<UActorComponent*> GraspOverlaps;
+		Owner->GetComponents(GraspOverlaps);
 		for (UActorComponent* GraspOverlapComp : GraspOverlaps)
 		{
 			USLBoneContactMonitor* GraspOverlap = CastChecked<USLBoneContactMonitor>(GraspOverlapComp);
@@ -381,7 +384,10 @@ void USLManipulatorMonitor::CreateBoneMonitors()
 			AActor* OnwerActor = GetOwner();
 
 			// Get existing bone monitors
-			TArray<UActorComponent*> ExistingBoneMonitors = AsSkelMA->GetComponentsByClass(USLBoneContactMonitor::StaticClass());
+			//Default: TArray<UActorComponent*> ExistingBoneMonitors = AsSkelMA->GetComponentsByClass(USLBoneContactMonitor::StaticClass());
+			//Nils: TArray<UActorComponent*> ExistingBoneMonitors = AsSkelMA->GetComponents<USLBoneContactMonitor>();
+			TArray<UActorComponent*> ExistingBoneMonitors;
+			AsSkelMA->GetComponents(ExistingBoneMonitors);
 
 			// Get list of the skeletal bone names
 			TArray<FName> BoneNames;

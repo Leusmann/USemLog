@@ -22,7 +22,7 @@
     },
     {
       "Name": "USemLogEd",
-      "Type": "Developer",
+      "Type": "Editor",
       "LoadingPhase": "Default"
     }
   ],
@@ -37,10 +37,10 @@
     },
     {
       "Name": "SRanipal",
-      "Enabled": true
+      "Enabled": false
     },
     {
-      "Name": "UProtobuf",
+      "Name": "UProtobuf", 
       "Enabled": true
     }
   ]

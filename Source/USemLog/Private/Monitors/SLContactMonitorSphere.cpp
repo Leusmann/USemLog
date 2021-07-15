@@ -203,19 +203,19 @@ void USLContactMonitorSphere::PostEditChangeProperty(struct FPropertyChangedEven
 	{
 		FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "Radius", FString::SanitizeFloat(SphereRadius));
 	}
-	else if (MemberPropertyName == GET_MEMBER_NAME_CHECKED(USLContactMonitorSphere, RelativeLocation))
+	else if (MemberPropertyName == GET_MEMBER_NAME_CHECKED(USLContactMonitorSphere, GetRelativeLocation()))
 	{
 		if (PropertyName == FName("X"))
 		{
-			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocX", FString::SanitizeFloat(RelativeLocation.X));
+			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocX", FString::SanitizeFloat(GetRelativeLocation().X));
 		}
 		else if (PropertyName == FName("Y"))
 		{
-			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocY", FString::SanitizeFloat(RelativeLocation.Y));
+			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocY", FString::SanitizeFloat(GetRelativeLocation().Y));
 		}
 		else if (PropertyName == FName("Z"))
 		{
-			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocZ", FString::SanitizeFloat(RelativeLocation.Y));
+			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocZ", FString::SanitizeFloat(GetRelativeLocation().Y));
 		}
 	}
 	else if (MemberPropertyName == GET_MEMBER_NAME_CHECKED(USLContactMonitorSphere, bReCalcShapeButton))

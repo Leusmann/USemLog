@@ -589,8 +589,11 @@ UPhysicsConstraintComponent* FSLGraspHelper::CreateGraspHelperConstraint(const F
 // Check if actor can/should be grasped
 bool FSLGraspHelper::ShouldBeGrasped(AActor* Actor) const
 {
+	TArray<UShapeComponent*> ShapeArray;
+	Actor->GetComponents<UShapeComponent>(ShapeArray);
 	// Check if object has a contact area
-	for (const auto& C : Actor->GetComponentsByClass(UShapeComponent::StaticClass()))
+//	for (const auto& C : Actor->GetComponentsByClass(UShapeComponent::StaticClass()))
+	for (const auto& C : ShapeArray)
 	{
 		if (C->GetName().StartsWith("SLContactMonitor"))
 		{

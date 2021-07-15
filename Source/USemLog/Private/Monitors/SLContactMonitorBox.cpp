@@ -214,22 +214,23 @@ void USLContactMonitorBox::PostEditChangeProperty(struct FPropertyChangedEvent& 
 			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "ExtY", FString::SanitizeFloat(BoxExtent.Y));
 		}
 	}
-	else if (MemberPropertyName == GET_MEMBER_NAME_CHECKED(USLContactMonitorBox, RelativeLocation))
+	else if (MemberPropertyName == GET_MEMBER_NAME_CHECKED(USLContactMonitorBox, GetRelativeLocation()))
 	{
 		if (PropertyName == FName("X"))
 		{
-			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocX", FString::SanitizeFloat(RelativeLocation.X));
+			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocX", FString::SanitizeFloat(GetRelativeLocation().X));
 		}
 		else if (PropertyName == FName("Y"))
 		{
-			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocY", FString::SanitizeFloat(RelativeLocation.Y));
+			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocY", FString::SanitizeFloat(GetRelativeLocation().Y));
 		}
 		else if (PropertyName == FName("Z"))
 		{
-			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocZ", FString::SanitizeFloat(RelativeLocation.Y));
+			FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "LocZ", FString::SanitizeFloat(GetRelativeLocation().Y));
 		}
 	}
-	else if (MemberPropertyName == GET_MEMBER_NAME_CHECKED(USLContactMonitorBox, RelativeRotation))
+	//https://answers.unrealengine.com/questions/950031/how-to-use-get-member-name-checked-with-upropertie.html we want to access private Variables but this Macro is in the Egnine? --> Override?
+	else if (MemberPropertyName == GET_MEMBER_NAME_CHECKED(USLContactMonitorBox, GetRelativeRotation())) 
 	{
 		const FQuat RelQuat = GetRelativeTransform().GetRotation();
 		FSLTagIO::AddKVPair(GetOwner(), TagTypeName, "QuatW", FString::SanitizeFloat(RelQuat.W));

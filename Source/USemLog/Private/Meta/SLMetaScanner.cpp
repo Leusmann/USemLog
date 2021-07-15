@@ -6,12 +6,12 @@
 #include "Monitors/SLContactMonitorInterface.h"
 #include "Engine/StaticMeshActor.h"
 #include "EngineUtils.h"
-#include "Async.h"
+#include "Async/Async.h"
 #include "HighResScreenshot.h"
 #include "ImageUtils.h"
 #include "Kismet/GameplayStatics.h"
 #include "Engine/GameViewportClient.h"
-#include "FileHelper.h"
+#include "Misc/FileHelper.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/LightComponent.h"
 #include "Materials/Material.h"
@@ -19,7 +19,7 @@
 #include "Engine/Light.h"
 #include "Engine/Engine.h"
 #include "Engine/DirectionalLight.h"
-
+#include "Components/ShapeComponent.h"
 
 // Ctor
 USLMetaScanner::USLMetaScanner()
@@ -996,7 +996,10 @@ bool USLMetaScanner::HasScanningRequirements(UStaticMeshComponent* SMC, float Ma
 // Check if the item is wrapped in a semantic contact shape (has a SLContactMonitorInterface sibling)
 bool USLMetaScanner::HasSemanticContactMonitor(UStaticMeshComponent* SMC) const
 {
-	for(const auto C : SMC->GetOwner()->GetComponentsByClass(UShapeComponent::StaticClass()))
+	TArray<UShapeComponent*> ShapeArray;
+	SMC->GetOwner()->GetComponents<UShapeComponent>(ShapeArray);
+//	for(const auto C : SMC->GetOwner()->GetComponentsByClass(UShapeComponent::StaticClass()))
+	for (const auto C : ShapeArray)
 	{
 		if (Cast<ISLContactMonitorInterface>(C))
 		{
